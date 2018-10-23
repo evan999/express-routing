@@ -1,13 +1,24 @@
 const express = require('express');
-const app = express();
+let app = express();
 const bodyParser = require('body-parser');
-const parseUrlencoded = bodyParser.urlenconded({extended: false});
+const url = require('url');  
+const querystring = require('querystring'); 
+//const parseUrlencoded = bodyParser.urlenconded({extended: false});
+
+app.use(bodyParser.urlencoded({ extended: false }));  
+app.use(bodyParser.json());
 
 // GET route to display name on the page
 
-app.get('/name/', (request, response) => {
+app.get('/', (req, res) => {
     const name = 'Evan Meshberg';
-    response.send(`<h1>${name}</h1>`);
+    res.send(`<h1>${name}</h1>`);
+});
+
+// Dynamic route to get ID by entering in ID number
+
+app.get('/:id', (req, res) => {
+    res.send(req.params.id);
 });
 
 
