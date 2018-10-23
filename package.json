@@ -1,0 +1,26 @@
+{
+  "name": "express-routing",
+  "version": "1.0.0",
+  "description": "Playing with express routes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evan999/express-routing.git"
+  },
+  "author": "Evan Meshberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evan999/express-routing/issues"
+  },
+  "homepage": "https://github.com/evan999/express-routing#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
