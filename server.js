@@ -3,7 +3,7 @@ let app = express();
 const bodyParser = require('body-parser');
 const url = require('url');  
 const querystring = require('querystring'); 
-//const parseUrlencoded = bodyParser.urlenconded({extended: false});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
@@ -20,6 +20,13 @@ app.get('/', (req, res) => {
 app.get('/:id', (req, res) => {
     res.send(req.params.id);
 });
+
+app.get('/add/num', (req, res) => {
+    const num1 = parseInt(req.query.num1, 10);
+    const num2 = parseInt(req.query.num2, 10);
+    res.send(`<h1>${num1 + num2}</h1>`);
+});
+
 
 
 
