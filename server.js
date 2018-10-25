@@ -8,6 +8,10 @@ const querystring = require('querystring');
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
 
+let items = ['pumpkin', 'candy', 'autumn', 'mummy', 'witch', 'ghost', 'baby'];
+
+
+
 // GET route to display name on the page
 
 app.get('/', (req, res) => {
@@ -27,8 +31,17 @@ app.get('/add/num', (req, res) => {
     res.send(`<h1>${num1 + num2}</h1>`);
 });
 
-
-
+app.post('/api/users', (req, res) => {
+    const username = 'evan999';
+    const password = 'password';
+    
+    if(username === toString(req.body.username) && password === toString(req.body.password)){
+        res.json({status: 'Logged in'});
+    }   
+    else{
+        res.json({status: 'Invalid credentials'});
+    }
+});
 
 const port = process.env.PORT || 5000;
 
