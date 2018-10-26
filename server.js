@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const url = require('url');  
 const querystring = require('querystring'); 
 
-
+var parseUrlencoded = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
 
@@ -25,7 +25,7 @@ app.get('/:id', (req, res) => {
     res.send(req.params.id);
 });
 
-app.get('/add/num', (req, res) => {
+app.get('/add/', (req, res) => {
     const num1 = parseInt(req.query.num1, 10);
     const num2 = parseInt(req.query.num2, 10);
     res.send(`<h1>${num1 + num2}</h1>`);
@@ -43,6 +43,16 @@ app.post('/api/users', (req, res) => {
     }
 });
 
+app.post('/api/item', (req, res) => {
+    var newItem = req.body;
+    items.push(toString(newItem));
+    res.json(items);
+});
+/*
+app.delete('/api/item', (req, res) => {
+    
+});
+*/
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log('Listening on port', port));
