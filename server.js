@@ -8,7 +8,7 @@ var parseUrlencoded = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
 
-let items = ['pumpkin', 'candy', 'autumn', 'mummy', 'witch', 'ghost', 'baby'];
+let items = ['pumpkin', 'candy', 'autumn', 'mummy', 'witch', 'ghost'];
 
 
 
@@ -25,10 +25,18 @@ app.get('/:id', (req, res) => {
     res.send(req.params.id);
 });
 
-app.get('/add/', (req, res) => {
-    const num1 = parseInt(req.query.num1, 10);
-    const num2 = parseInt(req.query.num2, 10);
-    res.send(`<h1>${num1 + num2}</h1>`);
+app.get('/add/:num', (req, res) => {
+    const num1 = parseInt(req.params.num1, 10);
+    const num2 = parseInt(req.params.num2, 10);
+    const word = req.params.word;
+    //res.send(`<h1>${num1 + num2}</h1>`);
+    
+    if(typeof req.query.word === undefined){
+        res.send(req.query.word);
+    }
+    else{
+        res.send(`<h1>${num1 + num2}</h1>`);
+    }
 });
 
 app.post('/api/users', (req, res) => {
@@ -44,8 +52,8 @@ app.post('/api/users', (req, res) => {
 });
 
 app.post('/api/item', (req, res) => {
-    var newItem = req.body;
-    items.push(toString(newItem));
+    var newItem = req.body.name;
+    items.push(newItem);
     res.json(items);
 });
 /*
