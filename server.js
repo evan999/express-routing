@@ -19,20 +19,23 @@ app.get('/', (req, res) => {
     res.send(`<h1>${name}</h1>`);
 });
 
+app.get('/test/', (req, res) => res.send('<h1>test route</h1>'));
+
 // Dynamic route to get ID by entering in ID number
 
-app.get('/:id', (req, res) => {
+app.get('/test/:id', (req, res) => {
     res.send(req.params.id);
 });
 
-app.get('/add/:num', (req, res) => {
+app.get('/test/add', (req, res) => {
     const num1 = parseInt(req.query.num1, 10);
     const num2 = parseInt(req.query.num2, 10);
-    var word = req.query.word;
-    //res.send(`<h1>${num1 + num2}</h1>`);
+    let word = req.query.word;
     
-    if(typeof req.query.word !== undefined){
-        res.send(req.query.word);
+    if(word !== undefined){
+        word = word.split('').join(' ');
+        console.log(word);
+        res.send(`<h1>You entered a word. Your word spelled out: ${word}</h1>`);
     }
     else{
         res.send(`<h1>${num1 + num2}</h1>`);
@@ -58,7 +61,18 @@ app.post('/api/item', (req, res) => {
 });
 
 app.delete('/api/item', (req, res) => {
-    var deletion = req.body.name;
+    const item = req.params.item;
+    const ifItem = items.indexOf(item);
+    
+    if(ifItem != -1){
+        items.splice(ifItem, 1);
+        res.json(`You deleted item ${item}`);
+    }
+    else{
+        res.status(406).json(`${item} not found`);
+        next();
+    }
+    
     res.json(items);
 });
 /*
