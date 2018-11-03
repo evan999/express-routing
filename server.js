@@ -1,5 +1,5 @@
 const express = require('express');
-let app = express();
+const app = express();
 const bodyParser = require('body-parser');
 const url = require('url');  
 const querystring = require('querystring'); 
@@ -26,12 +26,12 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/add/:num', (req, res) => {
-    const num1 = parseInt(req.params.num1, 10);
-    const num2 = parseInt(req.params.num2, 10);
-    const word = req.params.word;
+    const num1 = parseInt(req.query.num1, 10);
+    const num2 = parseInt(req.query.num2, 10);
+    var word = req.query.word;
     //res.send(`<h1>${num1 + num2}</h1>`);
     
-    if(typeof req.query.word === undefined){
+    if(typeof req.query.word !== undefined){
         res.send(req.query.word);
     }
     else{
@@ -40,10 +40,10 @@ app.get('/add/:num', (req, res) => {
 });
 
 app.post('/api/users', (req, res) => {
-    const username = 'evan999';
-    const password = 'password';
+    const username = req.body.username;
+    const password = req.body.password;
     
-    if(username === toString(req.body.username) && password === toString(req.body.password)){
+    if(username === "evan999" && password === "1234"){
         res.json({status: 'Logged in'});
     }   
     else{
@@ -54,6 +54,11 @@ app.post('/api/users', (req, res) => {
 app.post('/api/item', (req, res) => {
     var newItem = req.body.name;
     items.push(newItem);
+    res.json(items);
+});
+
+app.delete('/api/item', (req, res) => {
+    var deletion = req.body.name;
     res.json(items);
 });
 /*
